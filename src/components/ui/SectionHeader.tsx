@@ -3,6 +3,8 @@ interface SectionHeaderProps {
   title: string;
   description?: string;
   className?: string;
+  headingId?: string;
+  size?: "section" | "page";
 }
 
 export function SectionHeader({
@@ -10,19 +12,24 @@ export function SectionHeader({
   title,
   description,
   className = "",
+  headingId,
+  size = "section",
 }: SectionHeaderProps) {
+  const titleClasses =
+    size === "page"
+      ? "text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
+      : "text-3xl font-semibold tracking-tight text-foreground md:text-4xl";
+
   return (
-    <header className={`space-y-3 ${className}`}>
-      {eyebrow && (
-        <p className="text-sm font-medium tracking-wider text-accent uppercase">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+    <header className={`space-y-4 ${className}`}>
+      {eyebrow && <p className="text-eyebrow">{eyebrow}</p>}
+      <h2 id={headingId} className={titleClasses}>
         {title}
       </h2>
       {description && (
-        <p className="max-w-2xl text-lg text-muted-foreground">{description}</p>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          {description}
+        </p>
       )}
     </header>
   );

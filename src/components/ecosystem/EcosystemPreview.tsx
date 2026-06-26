@@ -1,61 +1,35 @@
-import { Link } from "react-router-dom";
-import { getLiveProducts } from "../../content/products";
+import { Card } from "../ui/Card";
+import { TextLink } from "../ui/TextLink";
 import { StatusBadge } from "../ui/StatusBadge";
+import { EcosystemGraph } from "./EcosystemGraph";
 
 export function EcosystemPreview() {
-  const liveProducts = getLiveProducts();
-
   return (
-    <section className="rounded-xl border border-border bg-surface p-6 md:p-8">
+    <Card variant="elevated" className="!p-6 md:!p-8">
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-medium tracking-wider text-accent uppercase">
-            Product Ecosystem
-          </p>
+          <p className="text-eyebrow">Product Ecosystem</p>
           <h2 className="mt-1 text-xl font-semibold text-foreground md:text-2xl">
-            Three layers. One platform vision.
+            5 Independent Products. One Platform Vision.
           </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Independent products today. Integrated platform tomorrow.
+          </p>
         </div>
         <StatusBadge status="platform-vision" />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-lg border border-border bg-background p-4">
-          <p className="text-xs font-medium tracking-wider text-muted uppercase">
-            Business Systems
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            PnLGuard · ChatLoom
-          </p>
-        </div>
-        <div className="rounded-lg border border-border bg-background p-4 text-center md:border-accent/30">
-          <p className="text-xs font-medium tracking-wider text-accent uppercase">
-            Platform Layer
-          </p>
-          <p className="mt-2 text-sm text-foreground font-medium">GoForge</p>
-        </div>
-        <div className="rounded-lg border border-border bg-background p-4 text-right md:text-left">
-          <p className="text-xs font-medium tracking-wider text-muted uppercase">
-            Operational Intelligence
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">SentryAI</p>
-        </div>
-      </div>
+      <EcosystemGraph mode="overview" compact />
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
         <p className="text-sm text-muted-foreground">
-          <span className="text-foreground font-medium">
-            {liveProducts.length} products live today.
-          </span>{" "}
-          Integrated workflows are in development.
+          Five production-ready products ship independently today. Platform
+          integrations are being added incrementally.
         </p>
-        <Link
-          to="/ecosystem"
-          className="text-sm font-medium text-accent hover:underline"
-        >
+        <TextLink to="/ecosystem#current-ecosystem">
           See full architecture →
-        </Link>
+        </TextLink>
       </div>
-    </section>
+    </Card>
   );
 }

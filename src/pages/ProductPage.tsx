@@ -1,16 +1,36 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
-import { PageMeta } from "../components/PageMeta";
+import { PageMeta, SITE_URL } from "../components/PageMeta";
+import { JsonLd } from "../components/JsonLd";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { NpmIcon } from "../components/ui/NpmIcon";
 import { MarketplaceIcon } from "../components/ui/MarketplaceIcon";
 import { FeaturePanel } from "../components/ui/FeaturePanel";
 import { ArchitectureCard } from "../components/ui/ArchitectureCard";
+import { ArchitectureDiagram } from "../components/ui/ArchitectureDiagram";
 import { MetricCard } from "../components/ui/MetricCard";
 import { InsightCard } from "../components/ui/InsightCard";
+import { ReleaseItem } from "../components/ui/ReleaseItem";
+import { RelatedProducts } from "../components/ui/RelatedProducts";
+import { Badge } from "../components/ui/Badge";
+import { LinkButton } from "../components/ui/LinkButton";
+import { ScreenshotGallery } from "../components/ui/ScreenshotGallery";
+import { Card } from "../components/ui/Card";
+import { ProductIcon } from "../components/icons/ProductIcon";
 import { getProductBySlug } from "../content/products";
 import { getStory } from "../content/stories";
 import { insights } from "../content/insights";
+
+function SectionLabel({ id, children }: { id: string; children: string }) {
+  return (
+    <h2
+      id={id}
+      className="text-sm font-medium tracking-wider text-muted uppercase"
+    >
+      {children}
+    </h2>
+  );
+}
 
 export function ProductPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -24,15 +44,53 @@ export function ProductPage() {
   const relatedInsights = insights.filter((i) =>
     i.relatedProductSlugs?.includes(product.slug),
   );
+  const ogImage = product.images[0]
+    ? `${SITE_URL}${product.images[0]}`
+    : undefined;
 
   return (
     <>
       <PageMeta
         title={product.name}
         description={`${product.tagline}. ${product.solution}`}
+        canonical={`${SITE_URL}/products/${product.slug}`}
+        ogImage={ogImage}
+        ogType="website"
+      />
+      <JsonLd
+        data={[
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Products",
+                item: `${SITE_URL}/products`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: product.name,
+                item: `${SITE_URL}/products/${product.slug}`,
+              },
+            ],
+          },
+          {
+            "@type": "SoftwareApplication",
+            name: product.name,
+            description: product.solution,
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Web",
+            url: product.url ?? `${SITE_URL}/products/${product.slug}`,
+            offers: product.url
+              ? { "@type": "Offer", price: "0", priceCurrency: "USD" }
+              : undefined,
+          },
+        ]}
       />
 
-      <article className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <article className="mx-auto max-w-6xl px-6 section-y">
         <Link
           to="/products"
           className="text-sm text-muted-foreground hover:text-foreground"
@@ -40,7 +98,7 @@ export function ProductPage() {
           ← All products
         </Link>
 
-        <header className="mt-8 max-w-3xl">
+        <header className="content-gap mt-8 max-w-3xl">
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={product.status} />
             {product.ecosystemLayer && (
@@ -48,90 +106,60 @@ export function ProductPage() {
                 Ecosystem: {product.ecosystemLayer} layer
               </span>
             )}
+            {product.license && (
+              <Badge variant="open-source" label={product.license} />
+            )}
           </div>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            {product.name}
-          </h1>
-          <p className="mt-4 text-xl text-muted-foreground">{product.tagline}</p>
+          <div className="mt-4 flex items-start gap-4">
+            <ProductIcon slug={product.slug} size="md" className="mt-1" />
+            <div>
+              <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                {product.name}
+              </h1>
+              <p className="mt-4 text-xl text-muted-foreground">{product.tagline}</p>
+            </div>
+          </div>
 
           {product.moat && (
-            <div className="mt-4 space-y-3">
-              <p className="text-sm font-medium text-muted-foreground">
-                {product.moat}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {product.npm && (
-                  <a
-                    href={product.npm}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-[#cb3837]/30 bg-[#cb3837]/10 px-4 py-2.5 text-sm font-medium text-[#ff8a8a] transition-colors hover:bg-[#cb3837]/20"
-                  >
-                    <NpmIcon className="h-4 w-4 shrink-0" />
-                    npm package
-                  </a>
-                )}
-                {product.marketplace && (
-                  <a
-                    href={product.marketplace}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-4 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
-                  >
-                    <MarketplaceIcon className="h-4 w-4 shrink-0" />
-                    GitHub Marketplace
-                  </a>
-                )}
-              </div>
-            </div>
+            <p className="mt-4 text-sm font-medium text-muted-foreground">
+              {product.moat}
+            </p>
           )}
 
           <div className="mt-6 flex flex-wrap gap-3">
             {product.url && (
-              <a
-                href={product.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent-muted"
-              >
+              <LinkButton href={product.url} external>
                 Visit live product
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </LinkButton>
             )}
             {product.github && !product.privateSource && (
-              <a
-                href={product.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface"
-              >
-                Source
+              <LinkButton href={product.github} variant="secondary" external>
+                Repository
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </LinkButton>
+            )}
+            {product.documentationUrl && (
+              <LinkButton
+                href={product.documentationUrl}
+                variant="secondary"
+                external
+              >
+                Documentation
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </LinkButton>
             )}
             {product.npm && (
-              <a
-                href={product.npm}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[#cb3837]/40 bg-[#cb3837]/10 px-5 py-2.5 text-sm font-medium text-[#ff8a8a] hover:bg-[#cb3837]/20"
-              >
+              <LinkButton href={product.npm} variant="npm" external>
                 <NpmIcon className="h-4 w-4" />
-                npm package
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+                npm
+              </LinkButton>
             )}
             {product.marketplace && (
-              <a
-                href={product.marketplace}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 text-sm font-medium text-accent hover:bg-accent/20"
-              >
+              <LinkButton href={product.marketplace} variant="marketplace" external>
                 <MarketplaceIcon className="h-4 w-4" />
-                GitHub Marketplace
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+                Marketplace
+              </LinkButton>
             )}
             {product.privateSource && (
               <span className="inline-flex min-h-[44px] items-center rounded-lg border border-dashed border-border px-5 py-2.5 text-sm text-muted-foreground">
@@ -142,81 +170,130 @@ export function ProductPage() {
         </header>
 
         {story && (
-          <blockquote className="mt-12 border-l-2 border-accent pl-6 text-lg italic leading-relaxed text-muted-foreground">
-            "{story}"
+          <blockquote className="page-block-gap border-l-2 border-accent pl-6 text-lg italic leading-relaxed text-muted-foreground">
+            &ldquo;{story}&rdquo;
           </blockquote>
         )}
 
-        <div className="mt-12">
-          <FeaturePanel problem={product.problem} solution={product.solution} />
-        </div>
+        <section className="page-block-gap" aria-labelledby="problem-solution">
+          <SectionLabel id="problem-solution">Problem &amp; solution</SectionLabel>
+          <div className="mt-6">
+            <FeaturePanel problem={product.problem} solution={product.solution} />
+          </div>
+        </section>
 
-        <div className="mt-12">
-          <ArchitectureCard
-            pipeline={product.architecture}
-            detail={product.architectureDetail}
-          />
-        </div>
+        <section className="page-block-gap" aria-labelledby="architecture">
+          <SectionLabel id="architecture">Architecture</SectionLabel>
+          <div className="mt-6 space-y-6">
+            {product.architectureDiagram ? (
+              <ArchitectureDiagram diagramKey={product.architectureDiagram} />
+            ) : (
+              <ArchitectureCard
+                pipeline={product.architecture}
+                detail={product.architectureDetail}
+              />
+            )}
+          </div>
+        </section>
 
         {product.metrics.length > 0 && (
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {product.metrics.map((metric) => (
-              <MetricCard key={metric} label="Capability" description={metric} />
-            ))}
-          </div>
-        )}
-
-        {product.images.length > 0 && (
-          <section className="mt-16" aria-labelledby="screenshots-heading">
-            <h2
-              id="screenshots-heading"
-              className="text-sm font-medium tracking-wider text-muted uppercase"
-            >
-              Screenshots
-            </h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {product.images.map((src, i) => (
-                <div
-                  key={src}
-                  className="overflow-hidden rounded-lg border border-border bg-background"
-                >
-                  <img
-                    src={src}
-                    alt={`${product.name} screenshot ${i + 1}`}
-                    className="h-full w-full object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
+          <section className="page-block-gap" aria-labelledby="capabilities">
+            <SectionLabel id="capabilities">Key capabilities</SectionLabel>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {product.metrics.map((metric) => (
+                <MetricCard key={metric} label="Capability" description={metric} />
               ))}
             </div>
           </section>
         )}
 
-        <section className="mt-16" aria-labelledby="tech-heading">
-          <h2
-            id="tech-heading"
-            className="text-sm font-medium tracking-wider text-muted uppercase"
-          >
-            Technology
-          </h2>
+        {product.images.length > 0 && (
+          <section className="page-block-gap" aria-labelledby="screenshots-heading">
+            <SectionLabel id="screenshots-heading">Screenshots</SectionLabel>
+            <ScreenshotGallery images={product.images} productName={product.name} />
+          </section>
+        )}
+
+        <section className="page-block-gap" aria-labelledby="tech-heading">
+          <SectionLabel id="tech-heading">Technology</SectionLabel>
           <div className="mt-4 flex flex-wrap gap-2">
             {product.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-border bg-surface px-3 py-1 text-sm text-muted-foreground"
-              >
-                {tech}
-              </span>
+              <Badge key={tech} variant="tech" label={tech} />
             ))}
           </div>
         </section>
 
-        {relatedInsights.length > 0 && (
-          <section className="mt-16" aria-labelledby="related-insights">
-            <h2
-              id="related-insights"
-              className="text-lg font-semibold text-foreground"
+        {product.release && (
+          <section className="page-block-gap" aria-labelledby="release-heading">
+            <SectionLabel id="release-heading">Release information</SectionLabel>
+            <div className="mt-6 max-w-lg">
+              <ReleaseItem
+                product={product.name}
+                version={product.release.version}
+                url={product.release.notesUrl ?? product.url ?? "#"}
+                date={product.release.date}
+              />
+            </div>
+          </section>
+        )}
+
+        {(product.roadmap?.length || product.roadmapUrl) && (
+          <section className="page-block-gap" aria-labelledby="roadmap-heading">
+            <SectionLabel id="roadmap-heading">Roadmap</SectionLabel>
+            {product.roadmapUrl ? (
+              <a
+                href={product.roadmapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block text-sm text-accent hover:underline"
+              >
+                View public roadmap →
+              </a>
+            ) : (
+              <ul className="mt-4 list-inside list-disc space-y-2 text-sm text-muted-foreground">
+                {product.roadmap?.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
+
+        <section className="page-block-gap" aria-labelledby="changelog-heading">
+          <SectionLabel id="changelog-heading">Changelog</SectionLabel>
+          {product.changelogUrl ? (
+            <a
+              href={product.changelogUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-sm text-accent hover:underline"
             >
+              View release history →
+            </a>
+          ) : (
+            <p className="mt-4 text-sm text-muted-foreground">
+              Public changelog coming soon.
+            </p>
+          )}
+        </section>
+
+        {product.relatedProductSlugs && product.relatedProductSlugs.length > 0 && (
+          <section className="page-block-gap" aria-labelledby="related-products">
+            <h2 id="related-products" className="text-lg font-semibold text-foreground">
+              Related products
+            </h2>
+            <div className="mt-6">
+              <RelatedProducts
+                slugs={product.relatedProductSlugs}
+                currentSlug={product.slug}
+              />
+            </div>
+          </section>
+        )}
+
+        {relatedInsights.length > 0 && (
+          <section className="page-block-gap" aria-labelledby="related-insights">
+            <h2 id="related-insights" className="text-lg font-semibold text-foreground">
               Related insights
             </h2>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -228,19 +305,19 @@ export function ProductPage() {
         )}
 
         {product.ecosystemLayer && (
-          <div className="mt-16 rounded-lg border border-dashed border-vision/30 bg-surface/50 p-6">
+          <Card variant="dashed" className="page-block-gap">
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">
-                Ecosystem context:
-              </span>{" "}
-              {product.name} maps to the{" "}
-              <strong>{product.ecosystemLayer}</strong> layer in the upcoming
-              integrated platform.{" "}
-              <Link to="/ecosystem" className="text-accent hover:underline">
+              <span className="font-medium text-foreground">Ecosystem context:</span>{" "}
+              {product.name} maps to the <strong>{product.ecosystemLayer}</strong>{" "}
+              layer in the upcoming integrated platform.{" "}
+              <Link
+                to={`/ecosystem#layer-${product.ecosystemLayer}`}
+                className="link-underline text-accent"
+              >
                 See ecosystem architecture →
               </Link>
             </p>
-          </div>
+          </Card>
         )}
       </article>
     </>

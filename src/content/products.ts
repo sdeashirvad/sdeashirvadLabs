@@ -42,7 +42,19 @@ export const products: Product[] = [
       "GitHub Marketplace Action — one-click install in workflows",
       "CLI, GitHub Actions, and PR comment integrations",
     ],
+    ecosystemLayer: "governance",
     featured: false,
+    architectureDiagram: "specsentinel",
+    release: {
+      version: "v1.0.0",
+      date: "2026-06-01",
+      notesUrl: "https://github.com/marketplace/actions/specsentinel",
+    },
+    documentationUrl: "https://github.com/sdeashirvad/specsentinel",
+    changelogUrl: "https://github.com/sdeashirvad/specsentinel/releases",
+    license: "MIT",
+    relatedProductSlugs: ["transaction-guard", "goforge"],
+    badges: ["open-source", "cli", "github-action", "typescript"],
   },
   {
     slug: "pnlguard",
@@ -72,6 +84,8 @@ export const products: Product[] = [
     ],
     ecosystemLayer: "business",
     featured: true,
+    badges: ["spring-boot", "react", "ai"],
+    relatedProductSlugs: ["chatloom", "goforge"],
   },
   {
     slug: "chatloom",
@@ -108,6 +122,8 @@ export const products: Product[] = [
     ],
     ecosystemLayer: "business",
     featured: true,
+    badges: ["spring-boot", "ai", "platform"],
+    relatedProductSlugs: ["pnlguard", "goforge"],
   },
   {
     slug: "goforge",
@@ -138,6 +154,9 @@ export const products: Product[] = [
     ],
     ecosystemLayer: "platform",
     featured: true,
+    badges: ["platform", "workflow", "go"],
+    architectureDiagram: "goforge",
+    relatedProductSlugs: ["sentryai", "specsentinel"],
   },
   {
     slug: "sentryai",
@@ -167,6 +186,8 @@ export const products: Product[] = [
     ],
     ecosystemLayer: "operational",
     featured: false,
+    badges: ["spring-boot", "react", "ai"],
+    relatedProductSlugs: ["goforge", "pnlguard"],
   },
   {
     slug: "transaction-guard",
@@ -196,6 +217,13 @@ export const products: Product[] = [
       "Configurable TTL with fail-open / fail-closed modes",
     ],
     featured: false,
+    badges: ["spring-boot", "platform"],
+    roadmap: [
+      "Redis-backed idempotency middleware",
+      "Lua distributed locking",
+      "Fail-open / fail-closed modes",
+    ],
+    relatedProductSlugs: ["specsentinel", "chatloom"],
   },
   {
     slug: "bloom",
@@ -231,6 +259,8 @@ export const products: Product[] = [
     ],
     researchProduct: true,
     featured: false,
+    badges: ["mobile", "offline-first", "react"],
+    relatedProductSlugs: ["veera"],
   },
   {
     slug: "veera",
@@ -263,6 +293,8 @@ export const products: Product[] = [
     ],
     researchProduct: true,
     featured: false,
+    badges: ["mobile", "ai", "offline-first"],
+    relatedProductSlugs: ["bloom"],
   },
 ];
 

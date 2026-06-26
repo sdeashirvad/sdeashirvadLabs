@@ -16,7 +16,7 @@ export function EcosystemNode({ layer, isLast = false }: EcosystemNodeProps) {
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-full max-w-md rounded-lg border border-dashed border-vision/40 bg-surface/50 p-6 text-center">
-        <StatusBadge status="platform-vision" className="mb-4" />
+        <StatusBadge status={layer.status} className="mb-4" />
         <h3 className="text-lg font-semibold text-foreground">{layer.label}</h3>
         <p className="mt-2 text-sm text-muted-foreground">{layer.description}</p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">

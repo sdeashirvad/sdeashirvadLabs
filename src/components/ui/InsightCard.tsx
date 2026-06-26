@@ -1,4 +1,5 @@
 import type { Insight } from "../../content/types";
+import { Badge } from "./Badge";
 
 interface InsightCardProps {
   insight: Insight;
@@ -10,16 +11,19 @@ export function InsightCard({ insight }: InsightCardProps) {
       href={insight.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/40"
+      className="group card-hover flex flex-col rounded-lg border border-border bg-surface card-padding"
     >
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <Badge
+          variant={insight.publishedOn === "medium" ? "medium" : "labs"}
+        />
+        <span className="text-xs text-muted">
+          {insight.readingTimeMinutes} min read
+        </span>
+      </div>
       <div className="mb-3 flex flex-wrap gap-2">
-        {insight.tags.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-surface-elevated px-2.5 py-0.5 text-xs text-muted-foreground"
-          >
-            {tag}
-          </span>
+        {insight.topics.slice(0, 3).map((topic) => (
+          <Badge key={topic} variant="topic" label={topic} />
         ))}
       </div>
       <h3 className="mb-2 text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
@@ -29,7 +33,7 @@ export function InsightCard({ insight }: InsightCardProps) {
         {insight.summary}
       </p>
       <div className="flex items-center justify-between text-sm">
-        <span className="text-muted">{insight.date}</span>
+        <time dateTime={insight.dateIso ?? insight.date}>{insight.date}</time>
         <span className="font-medium text-accent">Read on Medium →</span>
       </div>
     </a>

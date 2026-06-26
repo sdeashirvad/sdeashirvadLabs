@@ -14,7 +14,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <nav
         className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
         aria-label="Main navigation"
@@ -68,7 +68,7 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-nav"
-          className="border-t border-border bg-background px-6 py-4 md:hidden"
+          className="border-t border-border bg-surface-secondary px-6 py-4 md:hidden"
         >
           <ul className="space-y-1">
             {navLinks.map((link) => (

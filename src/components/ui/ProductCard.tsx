@@ -1,53 +1,82 @@
 import { Link } from "react-router-dom";
 import type { Product } from "../../content/types";
 import { StatusBadge } from "./StatusBadge";
+import { Badge, badgeLabelForProductBadge } from "./Badge";
+import { ArchitectureHint } from "./ArchitectureHint";
+import { ProductIcon } from "../icons/ProductIcon";
 import { NpmIcon } from "./NpmIcon";
 import { MarketplaceIcon } from "./MarketplaceIcon";
+import { getVisibleProductBadges } from "../../utils/productBadges";
 
 interface ProductCardProps {
   product: Product;
-  compact?: boolean;
 }
 
-export function ProductCard({ product, compact = false }: ProductCardProps) {
+function DistributionIcons({ product }: { product: Product }) {
+  if (!product.npm && !product.marketplace) return null;
+
+  return (
+    <div className="flex items-center gap-1.5">
+      {product.npm && (
+        <span
+          className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-npm/30 bg-npm/10 text-npm-muted"
+          title="npm"
+        >
+          <NpmIcon className="h-3 w-3" />
+        </span>
+      )}
+      {product.marketplace && (
+        <span
+          className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-accent/30 bg-accent/10 text-accent"
+          title="GitHub Marketplace"
+        >
+          <MarketplaceIcon className="h-3 w-3" />
+        </span>
+      )}
+    </div>
+  );
+}
+
+export function ProductCard({ product }: ProductCardProps) {
+  const capabilityBadges = getVisibleProductBadges(product, 4);
+
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="group flex flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/40 hover:bg-surface-elevated/50 focus-visible:outline-offset-4"
+      className="group card-hover flex h-full min-h-[220px] flex-col rounded-lg border border-border bg-surface card-padding focus-visible:outline-offset-4"
     >
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
-            {product.name}
-          </h3>
-          <p className="mt-1 text-sm text-muted-foreground">{product.tagline}</p>
-          {(product.npm || product.marketplace) && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {product.npm && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#cb3837]/30 bg-[#cb3837]/10 px-2.5 py-1 text-xs font-medium text-[#ff8a8a]">
-                  <NpmIcon className="h-3 w-3" />
-                  npm
-                </span>
-              )}
-              {product.marketplace && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
-                  <MarketplaceIcon className="h-3 w-3" />
-                  Marketplace
-                </span>
-              )}
-            </div>
-          )}
+      <div className="mb-4 flex items-start gap-3">
+        <ProductIcon slug={product.slug} size="md" />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-accent">
+              {product.name}
+            </h3>
+            <StatusBadge status={product.status} className="shrink-0" />
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground line-clamp-1">
+            {product.tagline}
+          </p>
         </div>
-        <StatusBadge status={product.status} />
       </div>
-      {!compact && (
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-          {product.solution}
-        </p>
-      )}
-      <span className="text-sm font-medium text-accent">
-        View product →
-      </span>
+
+      <div className="mt-auto space-y-3">
+        {(capabilityBadges.length > 0 || product.npm || product.marketplace) && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {capabilityBadges.map((b) => {
+              const { variant, label } = badgeLabelForProductBadge(b);
+              return <Badge key={b} variant={variant} label={label} />;
+            })}
+            <DistributionIcons product={product} />
+          </div>
+        )}
+
+        <ArchitectureHint architecture={product.architecture} />
+
+        <span className="inline-block text-sm font-medium text-accent">
+          View product →
+        </span>
+      </div>
     </Link>
   );
 }

@@ -10,14 +10,14 @@ export function ResearchCard({ product }: ResearchCardProps) {
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-lg border border-research/20 bg-surface transition-colors hover:border-research/40"
+      className="group image-hover flex flex-col overflow-hidden rounded-lg border border-border bg-surface card-hover"
     >
       {product.images[0] && (
         <div className="aspect-video overflow-hidden border-b border-border bg-background">
           <img
             src={product.images[0]}
             alt={`${product.name} preview`}
-            className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+            className="h-full w-full object-cover object-top"
             loading="lazy"
           />
         </div>
