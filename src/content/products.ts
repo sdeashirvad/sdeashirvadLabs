@@ -2,6 +2,49 @@ import type { Product, ProductStatus } from "./types";
 
 export const products: Product[] = [
   {
+    slug: "specsentinel",
+    name: "SpecSentinel",
+    tagline: "Open-source API contract governance",
+    status: "live",
+    url: "https://specsentinel.sdeashirvad.com",
+    github: "https://github.com/sdeashirvad/specsentinel",
+    npm: "https://www.npmjs.com/package/specsentinel",
+    marketplace: "https://github.com/marketplace/actions/specsentinel",
+    moat: "Live on npm & GitHub Marketplace — drop into any CI pipeline",
+    storyKey: "specsentinel",
+    problem:
+      "Breaking API changes ship through PRs undetected until production — contract drift has no gate.",
+    solution:
+      "Detect breaking OpenAPI changes, calculate deployment risk, enforce governance policies, and integrate via CLI, GitHub Actions, PR comments, and Studio.",
+    architecture:
+      "Spec Diff → Risk Engine → Policy Gate → CLI / GitHub Actions / PR Comment / Studio",
+    architectureDetail:
+      "Configurable governance policies with interactive Studio/WebView for contract review before merge.",
+    technologies: [
+      "TypeScript",
+      "Node.js",
+      "React",
+      "Vite",
+      "GitHub Actions",
+      "OpenAPI",
+      "JSON Schema",
+      "Vitest",
+    ],
+    images: [
+      "/projects/specsentinel-0.png",
+      "/projects/specsentinel-2.png",
+      "/projects/specsentinel-3.png",
+      "/projects/specsentinel-4.png",
+    ],
+    metrics: [
+      "Breaking OpenAPI change detection with deployment risk scoring",
+      "Published on npm — npx specsentinel for CI/CD pipelines",
+      "GitHub Marketplace Action — one-click install in workflows",
+      "CLI, GitHub Actions, and PR comment integrations",
+    ],
+    featured: false,
+  },
+  {
     slug: "pnlguard",
     name: "PnLGuard",
     tagline: "AI-assisted financial anomaly monitoring",
@@ -65,50 +108,6 @@ export const products: Product[] = [
     ],
     ecosystemLayer: "business",
     featured: true,
-  },
-  {
-    slug: "specsentinel",
-    name: "SpecSentinel",
-    tagline: "Open-source API contract governance",
-    status: "live",
-    url: "https://specsentinel.sdeashirvad.com",
-    github: "https://github.com/sdeashirvad/specsentinel",
-    npm: "https://www.npmjs.com/package/specsentinel",
-    marketplace: "https://github.com/marketplace/actions/specsentinel",
-    moat: "Live on npm & GitHub Marketplace — drop into any CI pipeline",
-    storyKey: "specsentinel",
-    problem:
-      "Breaking API changes ship through PRs undetected until production — contract drift has no gate.",
-    solution:
-      "Detect breaking OpenAPI changes, calculate deployment risk, enforce governance policies, and integrate via CLI, GitHub Actions, PR comments, and Studio.",
-    architecture:
-      "Spec Diff → Risk Engine → Policy Gate → CLI / GitHub Actions / PR Comment / Studio",
-    architectureDetail:
-      "Configurable governance policies with interactive Studio/WebView for contract review before merge.",
-    technologies: [
-      "TypeScript",
-      "Node.js",
-      "React",
-      "Vite",
-      "GitHub Actions",
-      "OpenAPI",
-      "JSON Schema",
-      "Vitest",
-    ],
-    images: [
-      "/projects/specsentinel-0.png",
-      "/projects/specsentinel-1.png",
-      "/projects/specsentinel-2.png",
-      "/projects/specsentinel-3.png",
-      "/projects/specsentinel-4.png",
-    ],
-      metrics: [
-        "Breaking OpenAPI change detection with deployment risk scoring",
-        "Published on npm — npx specsentinel for CI/CD pipelines",
-        "GitHub Marketplace Action — one-click install in workflows",
-        "CLI, GitHub Actions, and PR comment integrations",
-      ],
-    featured: false,
   },
   {
     slug: "goforge",
