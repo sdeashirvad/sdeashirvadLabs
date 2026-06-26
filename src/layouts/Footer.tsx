@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import { getLiveProducts, getResearchProducts } from "../content/products";
+import {
+  TAGLINE,
+  PLATFORM_VISION,
+  PLATFORM_VISION_SHORT,
+} from "../content/identity";
 
 const NPM_URL = "https://www.npmjs.com/package/specsentinel";
 const MARKETPLACE_URL = "https://github.com/marketplace/actions/specsentinel";
@@ -15,8 +20,10 @@ export function Footer() {
           <div>
             <p className="font-semibold text-foreground">SDEAshirvad Labs</p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              An engineering studio building connected platforms for financial
-              systems, orchestration, and operational intelligence.
+              {TAGLINE}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {PLATFORM_VISION}
             </p>
           </div>
 
@@ -145,8 +152,7 @@ export function Footer() {
         </div>
 
         <p className="mt-12 border-t border-border pt-8 text-center text-xs text-muted">
-          © {new Date().getFullYear()} SDEAshirvad Labs. Building in public,
-          shipping in production.
+          © {new Date().getFullYear()} SDEAshirvad Labs. {PLATFORM_VISION_SHORT}
         </p>
       </div>
     </footer>

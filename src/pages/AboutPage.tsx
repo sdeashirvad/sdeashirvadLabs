@@ -7,6 +7,7 @@ import { TextLink } from "../components/ui/TextLink";
 import { principles } from "../content/principles";
 import { products } from "../content/products";
 import { getActivityTimeline } from "../content/activity";
+import { TAGLINE, PLATFORM_VISION } from "../content/identity";
 
 export function AboutPage() {
   const liveCount = products.filter((p) => p.status === "live").length;
@@ -17,7 +18,7 @@ export function AboutPage() {
     <>
       <PageMeta
         title="About The Lab"
-        description="SDEAshirvad Labs is an independent engineering studio building a coherent ecosystem of products and platforms."
+        description={`${TAGLINE} ${PLATFORM_VISION}`}
         canonical={`${SITE_URL}/about`}
       />
       <JsonLd
@@ -38,6 +39,12 @@ export function AboutPage() {
       <PageSection id="mission" band="band" headerless>
         <div className="max-w-3xl space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">Mission</h2>
+          <p className="text-lg font-medium leading-relaxed text-foreground">
+            {TAGLINE}
+          </p>
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            {PLATFORM_VISION}
+          </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
             We build production systems across financial investigation, workflow
             orchestration, multi-channel GenAI, and operational intelligence.

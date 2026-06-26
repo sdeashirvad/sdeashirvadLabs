@@ -1,4 +1,4 @@
-import { PageMeta } from "../components/PageMeta";
+import { PageMeta, SITE_URL } from "../components/PageMeta";
 import { JsonLd } from "../components/JsonLd";
 import { EcosystemPreview } from "../components/ecosystem/EcosystemPreview";
 import { ProductCard } from "../components/ui/ProductCard";
@@ -18,7 +18,7 @@ import { principles } from "../content/principles";
 import { insights } from "../content/insights";
 import { getTrustStats } from "../content/trust";
 import { getRecentActivity } from "../content/activity";
-import { SITE_URL } from "../components/PageMeta";
+import { TAGLINE, PLATFORM_VISION, PLATFORM_VISION_SHORT } from "../content/identity";
 
 export function HomePage() {
   const liveProducts = getLiveProducts();
@@ -34,7 +34,7 @@ export function HomePage() {
     <>
       <PageMeta
         title="SDEAshirvad Labs"
-        description="An engineering studio building connected platforms for financial systems, orchestration, and operational intelligence."
+        description={`${TAGLINE} ${PLATFORM_VISION}`}
       />
       <JsonLd
         data={{
@@ -52,7 +52,13 @@ export function HomePage() {
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground md:text-6xl">
             SDEAshirvad Labs
           </h1>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <p className="mt-6 text-lg font-medium leading-relaxed text-foreground md:text-xl">
+            {TAGLINE}
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground md:text-xl">
+            {PLATFORM_VISION}
+          </p>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             A coherent ecosystem of products and platforms — financial
             investigation, workflow orchestration, GenAI interfaces, and
             operational intelligence.
@@ -194,7 +200,7 @@ export function HomePage() {
       <PageSection id="cta" band="band" headerless className="!py-16">
         <div className="text-center">
           <p className="text-lg font-medium text-foreground">
-            Building in public, shipping in production.
+            {PLATFORM_VISION_SHORT}
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
             Founded by{" "}
