@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../content/types";
 import { StatusBadge } from "./StatusBadge";
 import { NpmIcon } from "./NpmIcon";
+import { MarketplaceIcon } from "./MarketplaceIcon";
 
 interface ProductCardProps {
   product: Product;
@@ -20,11 +21,21 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
             {product.name}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">{product.tagline}</p>
-          {product.moat && (
-            <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[#cb3837]/30 bg-[#cb3837]/10 px-2.5 py-1 text-xs font-medium text-[#ff8a8a]">
-              <NpmIcon className="h-3 w-3" />
-              npm
-            </span>
+          {(product.npm || product.marketplace) && (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {product.npm && (
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#cb3837]/30 bg-[#cb3837]/10 px-2.5 py-1 text-xs font-medium text-[#ff8a8a]">
+                  <NpmIcon className="h-3 w-3" />
+                  npm
+                </span>
+              )}
+              {product.marketplace && (
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
+                  <MarketplaceIcon className="h-3 w-3" />
+                  Marketplace
+                </span>
+              )}
+            </div>
           )}
         </div>
         <StatusBadge status={product.status} />

@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { PageMeta } from "../components/PageMeta";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { NpmIcon } from "../components/ui/NpmIcon";
+import { MarketplaceIcon } from "../components/ui/MarketplaceIcon";
 import { FeaturePanel } from "../components/ui/FeaturePanel";
 import { ArchitectureCard } from "../components/ui/ArchitectureCard";
 import { MetricCard } from "../components/ui/MetricCard";
@@ -54,15 +55,35 @@ export function ProductPage() {
           <p className="mt-4 text-xl text-muted-foreground">{product.tagline}</p>
 
           {product.moat && (
-            <a
-              href={product.npm}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[#cb3837]/30 bg-[#cb3837]/10 px-4 py-2.5 text-sm font-medium text-[#ff8a8a] transition-colors hover:bg-[#cb3837]/20"
-            >
-              <NpmIcon className="h-4 w-4 shrink-0" />
-              {product.moat}
-            </a>
+            <div className="mt-4 space-y-3">
+              <p className="text-sm font-medium text-muted-foreground">
+                {product.moat}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {product.npm && (
+                  <a
+                    href={product.npm}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#cb3837]/30 bg-[#cb3837]/10 px-4 py-2.5 text-sm font-medium text-[#ff8a8a] transition-colors hover:bg-[#cb3837]/20"
+                  >
+                    <NpmIcon className="h-4 w-4 shrink-0" />
+                    npm package
+                  </a>
+                )}
+                {product.marketplace && (
+                  <a
+                    href={product.marketplace}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-4 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent/20"
+                  >
+                    <MarketplaceIcon className="h-4 w-4 shrink-0" />
+                    GitHub Marketplace
+                  </a>
+                )}
+              </div>
+            </div>
           )}
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -97,6 +118,18 @@ export function ProductPage() {
               >
                 <NpmIcon className="h-4 w-4" />
                 npm package
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+            )}
+            {product.marketplace && (
+              <a
+                href={product.marketplace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 text-sm font-medium text-accent hover:bg-accent/20"
+              >
+                <MarketplaceIcon className="h-4 w-4" />
+                GitHub Marketplace
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             )}

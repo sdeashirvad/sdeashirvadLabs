@@ -74,7 +74,8 @@ export const products: Product[] = [
     url: "https://specsentinel.sdeashirvad.com",
     github: "https://github.com/sdeashirvad/specsentinel",
     npm: "https://www.npmjs.com/package/specsentinel",
-    moat: "Published on npm — install via npx specsentinel in any CI pipeline",
+    marketplace: "https://github.com/marketplace/actions/specsentinel",
+    moat: "Live on npm & GitHub Marketplace — drop into any CI pipeline",
     storyKey: "specsentinel",
     problem:
       "Breaking API changes ship through PRs undetected until production — contract drift has no gate.",
@@ -104,6 +105,7 @@ export const products: Product[] = [
       metrics: [
         "Breaking OpenAPI change detection with deployment risk scoring",
         "Published on npm — npx specsentinel for CI/CD pipelines",
+        "GitHub Marketplace Action — one-click install in workflows",
         "CLI, GitHub Actions, and PR comment integrations",
       ],
     featured: false,

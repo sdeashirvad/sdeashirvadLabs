@@ -10,6 +10,7 @@ export interface Product {
   url?: string;
   github?: string;
   npm?: string;
+  marketplace?: string;
   moat?: string;
   privateSource?: boolean;
   storyKey: string;
