@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Labs site -->
   <url>
     <loc>https://labs.sdeashirvad.com/</loc>
     <changefreq>weekly</changefreq>
@@ -41,6 +42,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://labs.sdeashirvad.com/products/specsentinel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://labs.sdeashirvad.com/products/goforge</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -64,5 +70,42 @@
     <loc>https://labs.sdeashirvad.com/products/veera</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Live product deployments (sdeashirvad.com) -->
+  <url>
+    <loc>https://specsentinel.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pnlguard.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://chatloom.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://goforge.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sentryai.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bloom.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://veera.sdeashirvad.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

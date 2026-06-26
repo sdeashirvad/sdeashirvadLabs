@@ -48,6 +48,7 @@ Labs product pages link to target `*.sdeashirvad.com` URLs. Configure redirects 
 
 | Product | Legacy URL | Target URL |
 |---------|------------|------------|
+| SpecSentinel | — | specsentinel.sdeashirvad.com |
 | PnLGuard | pnlgaurd.ashirvad.work | pnlguard.sdeashirvad.com |
 | ChatLoom | chatloom.ashirvad.work | chatloom.sdeashirvad.com |
 | SentryAI | sentryai.ashirvad.work | sentryai.sdeashirvad.com |

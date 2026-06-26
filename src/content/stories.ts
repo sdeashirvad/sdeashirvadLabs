@@ -3,6 +3,8 @@ export const stories: Record<string, string> = {
     "I watched risk teams chase P&L breaks through spreadsheets long after the market moved. I built the review loop I wished existed — rules first, AI second, humans always in control.",
   chatloom:
     "Every GenAI demo was a single chat box. I wanted to prove multi-tenant RAG, personas, and real channels could share one backend — so I built it on nights and weekends until Telegram and web ran on the same orchestration layer.",
+  specsentinel:
+    "Breaking API changes used to surface in production, not in pull requests. I built SpecSentinel because contract drift deserved a gate — OpenAPI diffs, risk scores, and governance policies before deploy, not after the incident.",
   goforge:
     "Pipelines fail in the gaps between services — retries, queues, workers fighting for the same job. GoForge started as a place to watch orchestration breathe, not as a slide deck.",
   sentryai:

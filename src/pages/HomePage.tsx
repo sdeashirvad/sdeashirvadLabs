@@ -5,17 +5,13 @@ import { ProductCard } from "../components/ui/ProductCard";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { ResearchCard } from "../components/ui/ResearchCard";
 import { InsightCard } from "../components/ui/InsightCard";
-import { getFeaturedProducts, getLiveProducts, getResearchProducts } from "../content/products";
+import { getLiveProducts, getResearchProducts } from "../content/products";
 import { principles } from "../content/principles";
 import { insights } from "../content/insights";
 
 export function HomePage() {
-  const featured = getFeaturedProducts();
   const liveProducts = getLiveProducts();
   const research = getResearchProducts();
-  const otherLive = liveProducts.filter(
-    (p) => !featured.some((f) => f.slug === p.slug),
-  );
 
   return (
     <>
@@ -65,24 +61,17 @@ export function HomePage() {
             title="Products in production"
             description="Live platforms built with production-grade architecture — each stands alone today, designed to connect tomorrow."
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {featured.map((product) => (
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {liveProducts.map((product) => (
               <ProductCard key={product.slug} product={product} />
             ))}
           </div>
-          {otherLive.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-3">
-              {otherLive.map((product) => (
-                <Link
-                  key={product.slug}
-                  to={`/products/${product.slug}`}
-                  className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-accent/40 hover:text-foreground"
-                >
-                  {product.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          <Link
+            to="/products"
+            className="mt-8 inline-block text-sm font-medium text-accent hover:underline"
+          >
+            View all products →
+          </Link>
         </div>
       </section>
 

@@ -9,6 +9,8 @@ export interface Product {
   status: ProductStatus;
   url?: string;
   github?: string;
+  npm?: string;
+  moat?: string;
   privateSource?: boolean;
   storyKey: string;
   problem: string;

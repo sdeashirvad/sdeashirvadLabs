@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { PageMeta } from "../components/PageMeta";
 import { StatusBadge } from "../components/ui/StatusBadge";
+import { NpmIcon } from "../components/ui/NpmIcon";
 import { FeaturePanel } from "../components/ui/FeaturePanel";
 import { ArchitectureCard } from "../components/ui/ArchitectureCard";
 import { MetricCard } from "../components/ui/MetricCard";
@@ -52,6 +53,18 @@ export function ProductPage() {
           </h1>
           <p className="mt-4 text-xl text-muted-foreground">{product.tagline}</p>
 
+          {product.moat && (
+            <a
+              href={product.npm}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[#cb3837]/30 bg-[#cb3837]/10 px-4 py-2.5 text-sm font-medium text-[#ff8a8a] transition-colors hover:bg-[#cb3837]/20"
+            >
+              <NpmIcon className="h-4 w-4 shrink-0" />
+              {product.moat}
+            </a>
+          )}
+
           <div className="mt-6 flex flex-wrap gap-3">
             {product.url && (
               <a
@@ -72,6 +85,18 @@ export function ProductPage() {
                 className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-surface"
               >
                 Source
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </a>
+            )}
+            {product.npm && (
+              <a
+                href={product.npm}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[#cb3837]/40 bg-[#cb3837]/10 px-5 py-2.5 text-sm font-medium text-[#ff8a8a] hover:bg-[#cb3837]/20"
+              >
+                <NpmIcon className="h-4 w-4" />
+                npm package
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             )}

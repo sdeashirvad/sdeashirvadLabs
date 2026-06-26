@@ -67,6 +67,48 @@ export const products: Product[] = [
     featured: true,
   },
   {
+    slug: "specsentinel",
+    name: "SpecSentinel",
+    tagline: "Open-source API contract governance",
+    status: "live",
+    url: "https://specsentinel.sdeashirvad.com",
+    github: "https://github.com/sdeashirvad/specsentinel",
+    npm: "https://www.npmjs.com/package/specsentinel",
+    moat: "Published on npm — install via npx specsentinel in any CI pipeline",
+    storyKey: "specsentinel",
+    problem:
+      "Breaking API changes ship through PRs undetected until production — contract drift has no gate.",
+    solution:
+      "Detect breaking OpenAPI changes, calculate deployment risk, enforce governance policies, and integrate via CLI, GitHub Actions, PR comments, and Studio.",
+    architecture:
+      "Spec Diff → Risk Engine → Policy Gate → CLI / GitHub Actions / PR Comment / Studio",
+    architectureDetail:
+      "Configurable governance policies with interactive Studio/WebView for contract review before merge.",
+    technologies: [
+      "TypeScript",
+      "Node.js",
+      "React",
+      "Vite",
+      "GitHub Actions",
+      "OpenAPI",
+      "JSON Schema",
+      "Vitest",
+    ],
+    images: [
+      "/projects/specsentinel-0.png",
+      "/projects/specsentinel-1.png",
+      "/projects/specsentinel-2.png",
+      "/projects/specsentinel-3.png",
+      "/projects/specsentinel-4.png",
+    ],
+      metrics: [
+        "Breaking OpenAPI change detection with deployment risk scoring",
+        "Published on npm — npx specsentinel for CI/CD pipelines",
+        "CLI, GitHub Actions, and PR comment integrations",
+      ],
+    featured: false,
+  },
+  {
     slug: "goforge",
     name: "GoForge",
     tagline: "Workflow orchestration platform",
@@ -83,7 +125,12 @@ export const products: Product[] = [
     architectureDetail:
       "Watch worker utilization, queue depth, and job status distribution in real time. Load demos and job monitors validate orchestration behavior before production wiring.",
     technologies: ["Go", "Worker Pools", "Job Queues", "Retries", "Observability"],
-    images: ["/projects/goforge-1.svg"],
+    images: [
+      "/projects/goforge-1.png",
+      "/projects/goforge-2.png",
+      "/projects/goforge-3.png",
+      "/projects/goforge-4.png",
+    ],
     metrics: [
       "Real-time worker pool and queue depth observatory",
       "Configurable retries with job lifecycle tracking",

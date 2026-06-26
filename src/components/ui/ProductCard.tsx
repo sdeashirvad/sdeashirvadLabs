@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Product } from "../../content/types";
 import { StatusBadge } from "./StatusBadge";
+import { NpmIcon } from "./NpmIcon";
 
 interface ProductCardProps {
   product: Product;
@@ -19,6 +20,12 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
             {product.name}
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">{product.tagline}</p>
+          {product.moat && (
+            <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[#cb3837]/30 bg-[#cb3837]/10 px-2.5 py-1 text-xs font-medium text-[#ff8a8a]">
+              <NpmIcon className="h-3 w-3" />
+              npm
+            </span>
+          )}
         </div>
         <StatusBadge status={product.status} />
       </div>
