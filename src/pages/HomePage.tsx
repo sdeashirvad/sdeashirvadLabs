@@ -18,7 +18,12 @@ import { principles } from "../content/principles";
 import { insights } from "../content/insights";
 import { getTrustStats } from "../content/trust";
 import { getRecentActivity } from "../content/activity";
-import { TAGLINE, PLATFORM_VISION, PLATFORM_VISION_SHORT } from "../content/identity";
+import {
+  META_DESCRIPTION,
+  TAGLINE,
+  PLATFORM_VISION,
+  PLATFORM_VISION_SHORT,
+} from "../content/identity";
 
 export function HomePage() {
   const liveProducts = getLiveProducts();
@@ -34,7 +39,7 @@ export function HomePage() {
     <>
       <PageMeta
         title="SDEAshirvad Labs"
-        description={`${TAGLINE} ${PLATFORM_VISION}`}
+        description={META_DESCRIPTION}
       />
       <JsonLd
         data={{
